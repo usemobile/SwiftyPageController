@@ -116,7 +116,7 @@ open class SwiftyPageController: UIViewController {
                 if (viewController.viewIfLoaded != nil) {
                     viewController.view.removeFromSuperview()
                 }
-                viewController.removeFromParentViewController()
+                viewController.removeFromParent()
             }
         }
         
@@ -264,14 +264,14 @@ open class SwiftyPageController: UIViewController {
             // remove toController from hierarchy
             if isCancelled {
                 toController.view.removeFromSuperview()
-                toController.removeFromParentViewController()
+                toController.removeFromParent()
             } else {
-                fromController.didMove(toParentViewController: nil)
+                fromController.didMove(toParent: nil)
                 fromController.view.removeFromSuperview()
-                fromController.removeFromParentViewController()
+                fromController.removeFromParent()
                 
                 // present toController
-                toController.didMove(toParentViewController: self)
+                toController.didMove(toParent: self)
             }
             
             // change selectedIndex
@@ -363,7 +363,7 @@ open class SwiftyPageController: UIViewController {
         
         // show controller
         containerView.addSubview(controller.view)
-        controller.didMove(toParentViewController: self)
+        controller.didMove(toParent: self)
         
         // call delegate 'didMoveToController' methode
         self.delegate?.swiftyPageController(self, didMoveToController: controller)
@@ -373,8 +373,8 @@ open class SwiftyPageController: UIViewController {
         assert(viewControllers.count != 0, "Array 'viewControllers' count couldn't be 0")
         
         // add child view controller if it hasn't been added
-        if !childViewControllers.contains(viewControllers[index]) {
-            addChildViewController(viewControllers[index])
+        if !children.contains(viewControllers[index]) {
+            addChild(viewControllers[index])
         }
         
         // select controller
